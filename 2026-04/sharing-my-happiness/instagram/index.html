@@ -307,7 +307,7 @@
 <div class="container">
 
   <div class="panel">
-    <h2>Carousel Preview <span class="badge">10 Slide</span></h2>
+    <h2>Carousel Preview <span class="badge">11 Slide</span></h2>
 
     <div class="carousel-frame">
       <button class="carousel-nav prev" id="prev" aria-label="Previous">‹</button>
@@ -323,12 +323,13 @@
         <img src="slides/08.jpg" alt="Slide 8: Wisuda Sejarah → ngeShare" loading="lazy" />
         <img src="slides/09.jpg" alt="Slide 9: Lulus ngeSlow" loading="lazy" />
         <img src="slides/10.jpg" alt="Slide 10: My Happiness" loading="lazy" />
+        <img src="slides/11.jpg" alt="Slide 11: CTA — QR Code Baca Cerita Lengkap" loading="lazy" />
       </div>
       <div class="carousel-dots" id="dots"></div>
     </div>
 
     <div class="carousel-info">
-      <span>Slide <strong id="curr">1</strong> dari 10</span>
+      <span>Slide <strong id="curr">1</strong> dari 11</span>
       <span>Format: 1080×1080 · JPG</span>
     </div>
 
@@ -391,9 +392,10 @@ https://rizaramadan.github.io/ngeshare-stories/2026-04/sharing-my-happiness/
       <h3>Cara Posting</h3>
       <ul>
         <li>Download semua slide (ZIP) atau satu per satu di HP</li>
-        <li>Buka Instagram → Buat Post baru → Pilih multiple → Upload 10 slide secara berurutan (01 → 10)</li>
+        <li><strong>Pilih 10 slide</strong> untuk diupload (IG max carousel = 10). Rekomendasi: gunakan <strong>slide 1–9 + slide 11 (QR)</strong>, skip slide 10 yang asli</li>
+        <li>Buka Instagram → Buat Post baru → Pilih multiple → Upload sesuai urutan</li>
         <li>Copy caption di atas, paste di kolom caption IG</li>
-        <li>Cek hashtag — boleh tambah/kurangi sesuai akun</li>
+        <li>Slide terakhir (QR) memudahkan pembaca scan langsung pakai kamera HP — tidak perlu ketik URL manual</li>
         <li>Tag akun-akun terkait (Yuk Ngaji, ngeSlow, Mbak Alfi) jika diperlukan</li>
       </ul>
     </div>
@@ -411,7 +413,7 @@ https://rizaramadan.github.io/ngeshare-stories/2026-04/sharing-my-happiness/
   const prev = document.getElementById('prev');
   const next = document.getElementById('next');
   const downloadCurrent = document.getElementById('downloadCurrent');
-  const total = 10;
+  const total = 11;
   let active = 0;
 
   // Build dots
