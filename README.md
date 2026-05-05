@@ -2,12 +2,18 @@
 
 Kumpulan artikel sharing fasilitator ngeShare, untuk teman-teman yang berhalangan hadir di sesi rutin.
 
-Live site: https://rizaramadan.github.io/ngeshare-stories/
+**Live site:** https://rizaramadan.github.io/ngeshare-stories/
 
-## Artikel
+## Struktur
 
-- **Sharing My Happiness** — Cerita Mbak Alfi (Pematang Siantar), Leader Sharing Session #61, April 2026.
+```
+/                              ← landing page (daftar artikel)
+/2026-04/sharing-my-happiness/ ← artikel per bulan/judul
+```
 
-## Kontribusi
+## Tambah Artikel Baru
 
-Setiap artikel adalah file HTML statis. Tambahkan artikel baru sebagai folder atau file di repo ini, dan update `index.html` jika perlu mengarsipkan.
+1. Buat folder: `YYYY-MM/judul-slug/`
+2. Tambahkan `index.html` di dalamnya (boleh copy dari artikel sebelumnya sebagai template)
+3. Update `index.html` di root — tambahkan card di bagian bulan yang sesuai (atau buat section bulan baru)
+4. Commit & push — Pages auto-deploy dalam ~1 menit
