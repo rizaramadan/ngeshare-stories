@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Draft IG Post — Sharing My Happiness | ngeShare Stories</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0b1b3b;
+    --navy-2: #0f2452;
+    --blue: #2563eb;
+    --ink: #1f2937;
+    --ink-soft: #4b5563;
+    --ink-muted: #6b7280;
+    --line: #e5e7eb;
+    --bg: #f3f4f6;
+    --paper: #ffffff;
+    --green: #10b981;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .topbar {
+    background: var(--navy);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .topbar h1 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+  .topbar h1 .tag {
+    background: rgba(255,255,255,0.15);
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    margin-right: 8px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .topbar a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .topbar a:hover { color: white; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  @media (max-width: 900px) {
+    .container { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--paper);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(11, 27, 59, 0.06);
+  }
+  .panel h2 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink-muted);
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .panel h2 .badge {
+    background: var(--blue);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Carousel */
+  .carousel-frame {
+    position: relative;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+  }
+  .carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .carousel-track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+  }
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+  }
+  .carousel-nav:hover { background: rgba(0,0,0,0.75); }
+  .carousel-nav.prev { left: 12px; }
+  .carousel-nav.next { right: 12px; }
+  .carousel-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+  .carousel-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    transition: all 0.2s;
+  }
+  .carousel-dots span.active {
+    background: white;
+    width: 22px;
+    border-radius: 4px;
+  }
+
+  .carousel-info {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--ink-muted);
+    font-size: 13px;
+  }
+
+  .thumbs {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .thumbs img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.55;
+    transition: all 0.2s;
+  }
+  .thumbs img:hover { opacity: 0.85; }
+  .thumbs img.active {
+    border-color: var(--blue);
+    opacity: 1;
+  }
+
+  .download-row {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    background: var(--blue);
+    color: white;
+    border: 0;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn:hover { background: #1e40af; }
+  .btn:active { transform: scale(0.98); }
+  .btn.secondary {
+    background: white;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .btn.secondary:hover { background: var(--bg); }
+  .btn.success { background: var(--green); }
+
+  /* Caption */
+  .caption-wrap {
+    position: relative;
+  }
+  .caption {
+    background: #fafafa;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+    white-space: pre-wrap;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    width: 100%;
+    min-height: 480px;
+    resize: vertical;
+  }
+  .caption-meta {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--ink-muted);
+    font-size: 12px;
+  }
+  .caption-meta strong { color: var(--ink); }
+
+  .checklist {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-top: 24px;
+  }
+  .checklist h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: #92400e;
+  }
+  .checklist ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 13px;
+    color: #78350f;
+  }
+  .checklist li { margin-bottom: 4px; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--navy);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+    z-index: 100;
+  }
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1><span class="tag">Draft</span>Instagram Post — Sharing My Happiness</h1>
+  <a href="../">← Kembali ke artikel</a>
+</div>
+
+<div class="container">
+
+  <div class="panel">
+    <h2>Carousel Preview <span class="badge">10 Slide</span></h2>
+
+    <div class="carousel-frame">
+      <button class="carousel-nav prev" id="prev" aria-label="Previous">‹</button>
+      <button class="carousel-nav next" id="next" aria-label="Next">›</button>
+      <div class="carousel-track" id="track">
+        <img src="slides/01.jpg" alt="Slide 1: Cover" />
+        <img src="slides/02.jpg" alt="Slide 2: Influenching" loading="lazy" />
+        <img src="slides/03.jpg" alt="Slide 3: Life Crisis" loading="lazy" />
+        <img src="slides/04.jpg" alt="Slide 4: Positive Circle" loading="lazy" />
+        <img src="slides/05.jpg" alt="Slide 5: Curiosity" loading="lazy" />
+        <img src="slides/06.jpg" alt="Slide 6: ngeSlow 2024" loading="lazy" />
+        <img src="slides/07.jpg" alt="Slide 7: Consistently Influence" loading="lazy" />
+        <img src="slides/08.jpg" alt="Slide 8: Wisuda Sejarah → ngeShare" loading="lazy" />
+        <img src="slides/09.jpg" alt="Slide 9: Lulus ngeSlow" loading="lazy" />
+        <img src="slides/10.jpg" alt="Slide 10: My Happiness" loading="lazy" />
+      </div>
+      <div class="carousel-dots" id="dots"></div>
+    </div>
+
+    <div class="carousel-info">
+      <span>Slide <strong id="curr">1</strong> dari 10</span>
+      <span>Format: 1080×1080 · JPG</span>
+    </div>
+
+    <div class="thumbs" id="thumbs"></div>
+
+    <div class="download-row">
+      <a class="btn" href="slides.zip" download>⬇ Download semua slide (ZIP)</a>
+      <a class="btn secondary" id="downloadCurrent" href="slides/01.jpg" download>⬇ Slide ini</a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Caption <span class="badge">Siap Copy</span></h2>
+
+    <div class="caption-wrap">
+      <textarea class="caption" id="caption" readonly>Dari fangirling K-pop, sampai jadi fasilitator ngeShare. ✨
+
+Cerita Mbak Alfi (Pematang Siantar) di Leader Sharing Session #61.
+
+Awalnya beliau penggemar berat K-pop & K-drama. Karena rajin sharing, satu circle SMA-nya ikut suka semua. Sampai di satu titik — hatinya hampa. Tekanan kerja, hilang minat, hati tidak tenang.
+
+Beliau resign. Berhenti fangirling. Mulai hijrah.
+
+Tapi hijrah sendirian itu berat. Sering jatuh kembali. Sampai algoritma YouTube mempertemukannya dengan Yuk Ngaji, lalu podcast Ustaz Weemar–Mbak Dewi: "Cara Akal Menemukan Tuhan."
+
+Satu kalimat dari podcast itu mengena banget:
+
+"Lucunya orang zaman sekarang nggak mau buktiin agamanya bener, nggak mau nggak punya agama, tapi punya agama aturannya nggak dipakai."
+
+Dari sana, Mbak Alfi kenal ngeSlow → lulus 2024 → bikin grup hangout pertama awal 2025 → temannya (Mbak Popi) ikut → Mbak Popi pun jadi fasilitator. Sekarang keduanya sudah pegang dua grup hangout masing-masing.
+
+📌 5 pelajaran dari sesi ini:
+
+1. Bangun koneksi dulu, baru ajak.
+2. Sharing yang bahagia itu menular.
+3. Sosmed adalah aset dakwah.
+4. Rangkul, jangan judge.
+5. Niat baik dimudahkan Allah.
+
+"Hari ini saya ngajakin teman-teman belajar Islam — bukan hanya karena bagus, baik, keren, tapi juga saya meyakini ini bagian dari kebenaran."
+— Mbak Alfi
+
+🔗 Baca artikel lengkapnya di link bio.
+
+—
+
+#SharingMyHappiness #ngeShare #ngeSlow #FasilitatorNgeshare #DakwahDigital #YukNgaji #BelajarIslam #HijrahJourney #PematangSiantar #ShareThisWithYouMattersTheMost</textarea>
+      <div class="caption-meta">
+        <span><strong id="charCount">0</strong> karakter (limit IG: 2.200)</span>
+        <span>Hook (125 char pertama) tampil sebelum "more"</span>
+      </div>
+      <div class="download-row">
+        <button class="btn" id="copyBtn">📋 Copy caption</button>
+        <a class="btn secondary" href="caption.txt" download>⬇ Download .txt</a>
+      </div>
+    </div>
+
+    <div class="checklist">
+      <h3>Cara Posting</h3>
+      <ul>
+        <li>Download semua slide (ZIP) atau satu per satu di HP</li>
+        <li>Buka Instagram → Buat Post baru → Pilih multiple → Upload 10 slide secara berurutan (01 → 10)</li>
+        <li>Copy caption di atas, paste di kolom caption IG</li>
+        <li>Cek hashtag — boleh tambah/kurangi sesuai akun</li>
+        <li>Tag akun-akun terkait (Yuk Ngaji, ngeSlow, Mbak Alfi) jika diperlukan</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Caption tersalin ke clipboard</div>
+
+<script>
+  const track = document.getElementById('track');
+  const dots = document.getElementById('dots');
+  const thumbs = document.getElementById('thumbs');
+  const curr = document.getElementById('curr');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const downloadCurrent = document.getElementById('downloadCurrent');
+  const total = 10;
+  let active = 0;
+
+  // Build dots
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('span');
+    dots.appendChild(dot);
+  }
+  // Build thumbs
+  for (let i = 1; i <= total; i++) {
+    const img = document.createElement('img');
+    img.src = `slides/${String(i).padStart(2,'0')}.jpg`;
+    img.alt = `Thumbnail slide ${i}`;
+    img.loading = 'lazy';
+    img.addEventListener('click', () => goTo(i - 1));
+    thumbs.appendChild(img);
+  }
+
+  function goTo(i) {
+    active = Math.max(0, Math.min(total - 1, i));
+    track.style.transform = `translateX(-${active * 100}%)`;
+    [...dots.children].forEach((d, idx) => d.classList.toggle('active', idx === active));
+    [...thumbs.children].forEach((t, idx) => t.classList.toggle('active', idx === active));
+    curr.textContent = active + 1;
+    prev.disabled = active === 0;
+    next.disabled = active === total - 1;
+    const num = String(active + 1).padStart(2,'0');
+    downloadCurrent.href = `slides/${num}.jpg`;
+    downloadCurrent.download = `sharing-my-happiness-${num}.jpg`;
+  }
+
+  prev.addEventListener('click', () => goTo(active - 1));
+  next.addEventListener('click', () => goTo(active + 1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') goTo(active - 1);
+    if (e.key === 'ArrowRight') goTo(active + 1);
+  });
+
+  goTo(0);
+
+  // Char counter
+  const caption = document.getElementById('caption');
+  const charCount = document.getElementById('charCount');
+  charCount.textContent = caption.value.length.toLocaleString('id-ID');
+
+  // Copy button
+  const copyBtn = document.getElementById('copyBtn');
+  const toast = document.getElementById('toast');
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(caption.value);
+      copyBtn.textContent = '✓ Tersalin';
+      copyBtn.classList.add('success');
+      toast.classList.add('show');
+      setTimeout(() => {
+        copyBtn.textContent = '📋 Copy caption';
+        copyBtn.classList.remove('success');
+        toast.classList.remove('show');
+      }, 2000);
+    } catch (err) {
+      caption.select();
+      document.execCommand('copy');
+    }
+  });
+</script>
+
+</body>
+</html>
